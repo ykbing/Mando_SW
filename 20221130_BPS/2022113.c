@@ -11,11 +11,10 @@ int main(void)
     printf("통신 Byte를 입력해주세요: ");
     scanf("%d", &B_value);
 
-    // 전송 속도(S) = 데이터의 양(A) / 전송 시간(T)
-
     // msec <- sec 변환
     BPS = BPS_value / 1000;
 
+    // 전송 속도(S) = 데이터의 양(A) / 전송 시간(T)
     result_msec = 1 / BPS;
     B_input = result_msec * B_value;
 
