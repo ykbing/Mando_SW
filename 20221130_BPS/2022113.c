@@ -3,7 +3,7 @@
 int main(void)
 {
     int BPS_value, B_value;
-    float result_msec, time, BPS, B_input, B;
+    float result_msec, time, BPS, B_input;
 
     printf("BPS를 입력해주세요: ");
     scanf("%d", &BPS_value);
