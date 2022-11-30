@@ -7,30 +7,23 @@
 
 int main(void)
 {
-	int input_RPM = 0;
-	int input_pulse = 0;
-	float period = 0;
-	float result_period = 0.0;
+    int input_RPM, input_pulse = 0; 
+    float period, result_period = 0.0;
 
-	while (1)
-	{
-		printf("----Period(ms) 계산---- \n");
-		printf("모터 회전수(RPM): ");
-		scanf("%d", &input_RPM);
-		if (input_RPM > MAX_RPM)
-		{
-			printf("RPM값 초과 다시 입력해주세요");
-			continue;
-		}
 
-		printf("1회 회전당 pulse 수:");
-		scanf("%d", &input_pulse);
+    printf("----Period(ms) 계산---- \n");
+    printf("모터 회전수(RPM): ");
+    scanf("%d", &input_RPM);
 
-		period = ((input_RPM / 60) * input_pulse);
-		result_period = 1 / period * 1000;
+    input_RPM = (input_RPM > MAX_RPM) ? 3000 : input_RPM;
 
-		printf("계산된 주기(ms): %lf", result_period);
-	}
+    printf("1회 회전당 pulse 수:");
+    scanf("%d", &input_pulse);
 
-	return 0;
+    period = ((input_RPM/60) * input_pulse);
+    result_period = 1 / period * 1000;
+
+    printf("계산된 주기(ms): %0.3f", result_period);
+
+    return 0;
 }
