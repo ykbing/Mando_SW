@@ -15,10 +15,9 @@ int main(void)
 
     // msec <- sec 변환
     BPS = BPS_value / 1000;
-    B = B_value;
 
     result_msec = 1 / BPS;
-    B_input = B *result_msec;
+    B_input = result_msec * B_value;
 
     printf("1Byte 당 통신 소요시간: %0.3f msec \n", result_msec);
     printf("입력 바이트에 맞는 통신 시간: %0.3f msec", B_input);
