@@ -20,8 +20,8 @@ int32_t pos_error = 0;
 int32_t pos_error_old = 0;
 int32_t pos_error_d = 0;
 
-float p = 3;
-float pd = 5.8;
+float p = 1.6;
+float pd = 3.0;
 
 int pid_pwm = 0;
 
