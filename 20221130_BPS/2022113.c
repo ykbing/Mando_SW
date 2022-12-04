@@ -12,7 +12,7 @@ int main(void)
     printf("BPS를 입력해주세요(괄호 안 숫자 입력): ");
     scanf("%d", &BPS_choice);
 
-    BPS_value = BPS_LIST[BPS_choice+1]; 
+    BPS_value = BPS_LIST[BPS_choice - 1]; 
 
     printf("통신 Byte를 입력해주세요: ");
     scanf("%d", &B_value);
