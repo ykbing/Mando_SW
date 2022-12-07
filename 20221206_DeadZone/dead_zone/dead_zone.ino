@@ -14,7 +14,7 @@ int old_deadzone_count = 0;
 
 void Timer()
 {
-  deadzone_count = encoderPos <= 2 ? deadzone_count+=1 : deadzone_count;
+  deadzone_count = abs(encoderPos) <= 2 ? deadzone_count+=1 : deadzone_count;
   
   if(old_deadzone_count != deadzone_count)
   {
