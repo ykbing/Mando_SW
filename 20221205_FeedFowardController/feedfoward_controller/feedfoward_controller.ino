@@ -54,9 +54,10 @@ void Timer()
   }
   pos_error_old = pos_error;
 
-  pid_pwm = Feedfoward(pid_pwm);
+  pid_pwm = pi*pos_error_sum + p*pos_error + pd*pos_error_d;
+  
+  Pid_pwm = Feedfoward(pid_pwm);
 
-  pid_pwm = (pos_error > (double)target_Pos * 0.5) ? 255 : pid_pwm;
   // pid_pwm = pid_pwm > 255 ? 255 : pid_pwm;
 
   if(pid_pwm > 0)
