@@ -1,9 +1,7 @@
-// Front Motor Drive
 #define FMOTOR_PWM 5
 #define FMOTOR_ENA 6
 #define FMOTOR_ENB 7
 
-// Rear Motor Drive
 #define RMOTOR_PWM 2
 #define RMOTOR_ENA 3
 #define RMOTOR_ENB 4
