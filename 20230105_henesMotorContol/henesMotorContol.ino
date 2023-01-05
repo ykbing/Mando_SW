@@ -128,6 +128,6 @@ void loop()
       input_Rspeed = input_Fspeed;
      }
   Serial.print("Speed: ");
-  Serial.print(input_Fspeed);
+  Serial.println(input_Fspeed);
   }
 }
