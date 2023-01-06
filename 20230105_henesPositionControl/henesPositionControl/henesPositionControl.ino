@@ -112,8 +112,8 @@ int pos_pid_control(void)
 {
   pos_pid_pwm = P * pos_error + Pd * pos_error_d + Pi *pos_error_sum ;
 
-  pos_pid_pwm = (pos_pid_pwm >= 135) ? 135 : pos_pid_pwm;
-  pos_pid_pwm = (pos_pid_pwm <= -135) ? -135 : pos_pid_pwm;
+  pos_pid_pwm = (pos_pid_pwm >= 255) ? 255 : pos_pid_pwm;
+  pos_pid_pwm = (pos_pid_pwm <= -255) ? -255 : pos_pid_pwm;
 
   motor_control(pos_pid_pwm);
 }
