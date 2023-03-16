@@ -7,10 +7,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // Send Mode Clear
+    // Output Mode Send
     QObject::connect(ui->sendBtn, SIGNAL(clicked()), this, SLOT(sendBtn_clicked()));
 
-    // Clear Mode Send
+    // Output Mode Clear
     QObject::connect(ui->clearBtn, SIGNAL(clicked()), this, SLOT(clearBtn_clicked()));
 
     // Send Mode LED check
