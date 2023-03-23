@@ -42,14 +42,13 @@ public slots:
     void btn8_clicked(void);
     void clearValue_8(void);
     void inputValue_8(void);
-    void clearBtn_clicked(void);
-    void sendBtn_clicked(void);
     void clearBtn2_clicked(void);
     void sendBtn2_clicked(void);
-    void updateFrames(void);
     void on_openBtn_clicked(void);
     void on_stopBtn_clicked(void);
     void text_reading(void);
+    void init_array(void);
+    int map_c(int data, int in_min,int in_max,int out_min,int out_max);
 
 
 private:
@@ -59,7 +58,7 @@ private:
         unsigned char input_dataArr;
     };
     struct DATA2{
-        unsigned char output_dataArr[8];
+        unsigned char output_dataArr[16];
     };
 };
 

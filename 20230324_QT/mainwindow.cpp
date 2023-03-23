@@ -18,12 +18,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // Output Mode Receive Data
     QObject::connect(setPort, SIGNAL(readyRead()), this, SLOT(text_reading()));
 
-    // Output Mode Clear
-    QObject::connect(ui->clearBtn, SIGNAL(clicked()), this, SLOT(clearBtn_clicked()));
-
-    // Output Mode LED check
-    QObject::connect(ui->ledBtn, SIGNAL(clicked()), this, SLOT(updateFrames()));
-
     // Input Mode 0, 1
     QObject::connect(ui->btn1, SIGNAL(clicked()), this, SLOT(btn1_clicked()));
     QObject::connect(ui->btn2, SIGNAL(clicked()), this, SLOT(btn2_clicked()));
@@ -50,7 +44,7 @@ MainWindow::~MainWindow()
 //******* Clicked Serial Open Button *******//
 void MainWindow::on_openBtn_clicked(void)
 {
-    setPort->setPortName("ttyUSB1"); // 포트 번호 설정
+    setPort->setPortName("ttyUSB0"); // 포트 번호 설정
     setPort->setBaudRate(QSerialPort::Baud115200); // 전송 속도 설정
     setPort->setDataBits(QSerialPort::Data8); // 데이터 비트 설정
     setPort->setParity(QSerialPort::NoParity); // 패리티 비트 설정
@@ -74,9 +68,18 @@ void MainWindow::on_stopBtn_clicked(void)
     qDebug() << "Closed serial port";
 }
 
-const int numElements = 8;  // 8개의 값을 담을 수 있는 배열 크기
+const int numElements = 16;  // 8개의 값을 담을 수 있는 배열 크기
 unsigned int receivedValues[numElements] = {0,};
 unsigned int OUTPUT_buff[numElements] = {0,};
+
+//******* Binary calculate *******//
+void MainWindow::init_array(void)
+{
+    for(int i=0; i<16; i++)
+    {
+        OUTPUT_buff[i] = 0;
+    }
+}
 
 //******* Binary calculate *******//
 void calculate(int data, int count)
@@ -88,12 +91,17 @@ void calculate(int data, int count)
     }
 }
 
+int MainWindow::map_c(int data, int in_min,int in_max,int out_min,int out_max )
+{
+    return (data - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
 //******* Receive Data *******//
 void MainWindow::text_reading(void)
 {
+    init_array();
     QByteArray data2 = setPort->readAll();
-
-    int rx_data = 0;
+    int rx_data = 0, adc_data;
 
     if (data2.size() == sizeof(DATA2)) // 데이터 크기 확인
     {
@@ -108,7 +116,11 @@ void MainWindow::text_reading(void)
             if(i == 4)
             {
               rx_data = receivedValues[i];
-              qDebug() <<  rx_data;
+            }
+
+            if(i == 12)
+            {
+              adc_data = receivedValues[i];
             }
         }
     }
@@ -116,7 +128,13 @@ void MainWindow::text_reading(void)
     {
         //qDebug() << "error";
     }
-    qDebug() <<  rx_data;
+
+    QString ri_value = QString::number(rx_data);
+    ui->r_value->setText(ri_value);
+
+    adc_data = map_c(adc_data,0,255,0,4096);
+    QString adcValue = QString::number(adc_data);
+    ui->adc_value->setText(adcValue);
 
     if(rx_data >= 128)                     calculate(rx_data,8);
     else if(rx_data >= 64 && rx_data < 128)   calculate(rx_data,7);
@@ -145,53 +163,6 @@ void MainWindow::text_reading(void)
     (OUTPUT_buff[7] == 1) ?  frames[0]->setStyleSheet("background-color: green;") : frames[0]->setStyleSheet("background-color: red;");
 }
 
-////******* Change LED Color *******//
-//void MainWindow::updateFrames(void)
-//{
-//    // HEX_INPUT의 입력값을 가져옴
-//    QString hexValue = ui->hex_value->text();
-
-//    // 입력값을 10자리의 2진수 문자열로 변환
-//    QString binaryValue = QString("%1").arg(hexValue.toUInt(nullptr, 10), 8, 2, QLatin1Char('0'));
-
-//    // 변환된 2진수 문자열에서 각 자리의 값을 배열에 저장
-//    int values[8];
-//    for (int i = 0; i < 8; i++) {
-//    values[i] = binaryValue.mid(i, 1).toInt();
-//    }
-
-
-//    // frame 포인터 배열
-//    QFrame* frames[8] = {ui->led8, ui->led7, ui->led6, ui->led5,
-//    ui->led4, ui->led3, ui->led2, ui->led1};
-
-//    // 배열의 값을 기반으로 frame 색상 설정
-//    for (int i = 0; i < 8; i++)
-//    {
-//        if (values[i] == 0)
-//        {
-//            frames[i]->setStyleSheet("background-color: red;");
-//        }
-//        else
-//        {
-//            frames[i]->setStyleSheet("background-color: green;");
-//        }
-//    }
-//}
-
-//******* Output Send Value *******//
-void MainWindow::sendBtn_clicked(void)
-{
-    QString myStr2;
-    myStr2=ui->hex_value->text();
-    ui->hex_value->setText(myStr2);
-}
-
-//******* Output Value Clear *******//
-void MainWindow::clearBtn_clicked(void)
-{
-    ui->hex_value->clear();
-}
 
 //******* Input Value Clear *******//
 void MainWindow::clearBtn2_clicked(void)
