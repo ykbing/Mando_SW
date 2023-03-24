@@ -97,6 +97,11 @@ void initINPUT(void)
     IfxPort_setPinMode(INIT, IfxPort_Mode_inputPullUp);
 }
 
+void initbuff(void)
+{
+    for(i=0;i<8;i++)    OUTPUT_buff[i] = 0;
+}
+
 void calculate(int data, int count)
 {
     for(i = 0;i < count;i++)
@@ -104,11 +109,6 @@ void calculate(int data, int count)
         OUTPUT_buff[i] = data % 2;
         data /= 2;
     }
-}
-
-void initbuff(void)
-{
-    for(i=0;i<8;i++)    OUTPUT_buff[i] = 0;
 }
 
 void OUTPUT_control(int data)
