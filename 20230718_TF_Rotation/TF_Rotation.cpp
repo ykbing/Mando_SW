@@ -5,11 +5,11 @@
 #define RAD2DEG(x)   x*180/M_PI 
 #define DEG2RAD(x)   x/180*M_PI
 
-#define Map_x 0.0
+#define Map_x -1.0
 #define Map_y 1.0
 
 #define BaseLink_x 1.0
-#define BaseLink_y 0.0
+#define BaseLink_y 1.0
 
 typedef struct 
 {
