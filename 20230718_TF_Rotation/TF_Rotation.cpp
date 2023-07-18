@@ -1,4 +1,4 @@
-// TF_Rotation.cpp : ÄÜ¼Ö ÀÀ¿ë ÇÁ·Î±×·¥¿¡ ´ëÇÑ ÁøÀÔÁ¡À» Á¤ÀÇÇÕ´Ï´Ù.
+// TF_Rotation.cpp : ì½˜ì†” ì‘ìš© í”„ë¡œê·¸ë¨ì— ëŒ€í•œ ì§„ì…ì ì„ ì •ì˜í•©ë‹ˆë‹¤.
 //
 
 #include "stdafx.h"
@@ -8,11 +8,11 @@
 #define RAD2DEG(x)   x*180/M_PI 
 #define DEG2RAD(x)   x/180*M_PI
 
-#define Map_x -1.0
+#define Map_x 0.0
 #define Map_y 1.0
 
 #define BaseLink_x 1.0
-#define BaseLink_y 1.0
+#define BaseLink_y 0.0
 
 typedef struct 
 {
@@ -93,7 +93,7 @@ void Input_Data()
 
 int _tmain(int argc, _TCHAR* argv[])
 {	
-	Input_Data();
+	//Input_Data();
 
 	set_rotation_matrix(base_link_origin.theta);
 	set_rotation_matrix_inverse(base_link_origin.theta);
