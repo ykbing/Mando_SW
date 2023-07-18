@@ -93,7 +93,7 @@ void Input_Data()
 
 int _tmain(int argc, _TCHAR* argv[])
 {	
-	//Input_Data();
+	Input_Data();
 
 	set_rotation_matrix(base_link_origin.theta);
 	set_rotation_matrix_inverse(base_link_origin.theta);
