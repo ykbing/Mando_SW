@@ -55,7 +55,7 @@ void set_rotation_matrix_inverse(double m_angle_degree)
 	*/
 }
 
-/*******************************1. base_link -> map *************************************/
+/*******************************2. base_link -> map *************************************/
 
 //  base_link => base_link_map
 void TF_base_link_base_link_map(Point2D* base_link_Point2d, Point2D* base_link_map_point2d, Pose2D base_link_origin)
@@ -90,7 +90,7 @@ void TF_base_link_map(Point2D* base_link_2D, Point2D* base_link_map_2D, Pose2D b
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*******************************2. map -> base_link *************************************/
+/*******************************1. map -> base_link *************************************/
 //  map => base_link_map
 void TF_map_base_link_map(Point2D* base_link_2D, Point2D* base_link_map_point2d, Pose2D base_link_origin)
 {
